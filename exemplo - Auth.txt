@@ -1,0 +1,13 @@
+http://localhost:5001/login
+
+Post - Registrar
+
+$headers = @{ "Content-Type" = "application/json" }
+$body = '{"username": "renilson", "email": "jras@ic.ufal.br", "password": "123456789"}'
+Invoke-WebRequest -Uri "http://localhost:5001/register" -Method POST -Headers $headers -Body $body
+
+Login:
+
+$headers = @{ "Content-Type" = "application/json" }
+$body = '{"username": "renilson", "password": "123456789"}'
+Invoke-WebRequest -Uri "http://localhost:5001/login" -Method POST -Headers $headers -Body $body
