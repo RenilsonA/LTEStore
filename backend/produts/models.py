@@ -8,10 +8,10 @@ class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     description = db.Column(db.Text)
-    data_volume = db.Column(db.Integer, nullable=False)  # em MB
-    validity_days = db.Column(db.Integer, nullable=False)  # dias de validade
-    price = db.Column(db.Float, nullable=False)  # em R$
-    operator = db.Column(db.String(50), nullable=False)  # operadora (Vivo, Claro, etc.)
+    data_volume = db.Column(db.Integer, nullable=False)
+    validity_days = db.Column(db.Integer, nullable=False)
+    price = db.Column(db.Float, nullable=False) 
+    operator = db.Column(db.String(50), nullable=False)
     is_active = db.Column(db.Boolean, default=True)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, server_default=db.func.now(), onupdate=db.func.now())

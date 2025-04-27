@@ -3,9 +3,9 @@ http://localhost:5000/products
 #Post
 
 $body = @{
-    name = "Pacote LTE 50GB"
+    name = "Pacote LTE 25GB"
     description = "25GB de internet"
-    data_volume = 25.600
+    data_volume = 25600
     validity_days = 30
     price = 49.90
     operator = "Vivo"

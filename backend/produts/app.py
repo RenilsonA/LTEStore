@@ -5,7 +5,6 @@ import os
 from datetime import datetime
 from flask_cors import CORS 
 
-# Carrega variáveis de ambiente
 load_dotenv()
 
 app = Flask(__name__)
@@ -14,15 +13,12 @@ CORS(app)
 
 from urllib.parse import quote_plus
 
-# Carrega variáveis com valores padrão
 db_user = os.getenv('MYSQL_USER', 'root')
 db_password = quote_plus(os.getenv('MYSQL_PASSWORD', '123456789'))
 db_host = os.getenv('MYSQL_HOST', 'localhost')
 db_port = os.getenv('MYSQL_PORT', '3306')
 db_name = os.getenv('MYSQL_DATABASE', 'ecommerce_lte')
-
 app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+pymysql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}"
-
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
     'pool_size': 10,
@@ -32,17 +28,16 @@ app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
 
 db = SQLAlchemy(app)
 
-# Modelo Product
 class Product(db.Model):
     __tablename__ = 'products'
     
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     description = db.Column(db.Text)
-    data_volume = db.Column(db.Integer, nullable=False)  # em MB
-    validity_days = db.Column(db.Integer, nullable=False)  # dias de validade
-    price = db.Column(db.Float, nullable=False)  # em R$
-    operator = db.Column(db.String(50), nullable=False)  # operadora (Vivo, Claro, etc.)
+    data_volume = db.Column(db.Integer, nullable=False)
+    validity_days = db.Column(db.Integer, nullable=False)
+    price = db.Column(db.Float, nullable=False)
+    operator = db.Column(db.String(50), nullable=False)
     is_active = db.Column(db.Boolean, default=True)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, server_default=db.func.now(), onupdate=db.func.now())
@@ -61,7 +56,6 @@ class Product(db.Model):
             'updated_at': self.updated_at.isoformat() if self.updated_at else None
         }
 
-# Serviço de Produtos
 class ProductService:
     def get_all_products(self):
         return Product.query.filter_by(is_active=True).all()
@@ -135,7 +129,6 @@ class ProductService:
 
 product_service = ProductService()
 
-# Endpoints
 @app.route('/products', methods=['GET'])
 def get_products():
     products = product_service.get_all_products()
