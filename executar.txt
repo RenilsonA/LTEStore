@@ -1,12 +1,30 @@
-pip install -r ..\requirements.txt
+Terminal 1:
 python -m venv venv
 venv\Scripts\activate
-python .backend\produts\app.py
-python .backend\auth\app.py
-python .backend\cart\app.py
-na pasta frontend: python -m http.server 8000
+pip install -r requirements.txt
+python backend\produts\app.py
+
+
+Terminal 2:
+python -m venv venv
+venv\Scripts\activate
+python backend\auth\app.py
+
+
+Terminal 3:
+python -m venv venv
+venv\Scripts\activate
+python backend\cart\app.py
+
+Terminal 4:
+python -m venv venv
+venv\Scripts\activate
+cd frontend
+python -m http.server 8000
 
 
 Criar databases:
 Auth: CREATE DATABASE auth_db;
 Products: CREATE DATABASE ecommerce_lte;
+
+
